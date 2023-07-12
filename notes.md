@@ -1486,3 +1486,308 @@ Concluímos a Aula 2! Se tiver alguma dúvida, não deixe de aparecer lá no fó
 Por que não ajudar a responder a uma dúvida? Explicar um assunto para alguém é uma ótima forma de aprender e consolidar o conhecimento!
 
 Nos vemos na próxima aula!
+
+####12/07/2023
+
+@03 => Controle de fluxo com loopings
+
+@@01
+Projeto da aula anterior
+
+Foi criado um playground com exemplos similares ao que vimos na aula anterior. Você pode ir acompanhando o passo a passo do desenvolvimento do nosso código no Github e, caso deseje, pode baixar o código da aula anterior.
+Observação: O código fica dentro do arquivo “Contents.swift”, dentro de cada pasta do Playground.
+Bons estudos!
+
+https://github.com/alura-cursos/swift-entendendo-a-linguagem/tree/aula-02
+
+https://github.com/alura-cursos/swift-entendendo-a-linguagem/archive/refs/heads/aula-02.zip
+
+@@02
+Loop com For
+
+Agora vamos aprender sobre laços de repetição, muito usados na programação, aplicados na linguagem Swift.
+O que são laços de repetição?
+Entenderemos melhor o que é isso com um exemplo do dia a dia: vamos supor que você tenha acabado de fazer o seu café e gosta de tomá-lo adoçado. Então você pega um pouco de açúcar, coloca no café, mexe com uma colher e aí você toma.
+
+Nesse momento, você verifica se o gosto está bom para o seu paladar ou não. Se você achar que precisa de mais açúcar, você repete todo o processo: pega mais um pouco de açúcar, coloca no café, mexe com uma colher e toma novamente para verificar se te agrada.
+
+A condição de parada, então, é justamente essa: o gosto estar agradável para o seu paladar.
+
+Você repete todos os "comandos" até a sua condição de parada.
+Laços de repetição em Swift
+No Swift, podemos representar laços de operação por três comandos diferentes:
+
+For
+While
+Repeat while, que em outras linguagens pode ser conhecido como do... while
+Voltando ao nosso código, vamos supor que queremos exibir no console a mensagem "eu amo a linguagem Swift" dez vezes.
+
+Como fazer isso? Precisamos realmente escrever print "Eu amo a linguagem Swift" dez vezes? A resposta é: não! Os laços de repetição servem justamente para isso.
+
+Loop com For
+Vamos introduzir esse conceito com o laço de repetição for, que utiliza o intervalo de valores, algo que vimos durante esse curso.
+
+Começaremos escrevendo o for e declararemos uma variável i para manter a contagem das vezes que executaremos esse laço de repetição. Em seguida escrevemos in, porque agora precisamos exibir a condição.
+
+A condição é: se queremos exibir a mensagem "Eu amo a linguagem Swift" dez vezes na tela, então esse loop precisa rodar dez vezes. Para isso, utilizamos o intervalo de valores 1...10, representando os valores de um até dez:
+
+for i in 1...10 {
+
+}COPIAR CÓDIGO
+Antes de exibir a mensagem, vamos escrever print(i):
+
+for i in 1...10 {
+    print(i)
+}COPIAR CÓDIGO
+Se executarmos esse código, veremos no console a exibição dos números de um a dez, um por linha. Ou seja, esse i é uma variável que armazena o valor atual dentro do intervalo de valores que estipulamos.
+
+Então, na primeira execução, o i é igual a 1, porque o nosso intervalo de valores começa em 1. Na segunda execução o i é 2, e assim por diante.
+
+Dessa forma, para exibir a mensagem desejada no console, escrevemos "Eu amo a linguagem Swift" dentro de print:
+
+for i in 1...10 {
+    print("Eu amo a linguagem Swift")
+}COPIAR CÓDIGO
+Ao executar esse código, a mensagem aparecerá dez vezes no console:
+
+Eu amo a linguagem Swift
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+Eu amo a linguagem Swift
+
+O Xcode dará um aviso numa caixa de mensagem amarela no canto superior direito da tela, dizendo que declaramos essa variável i, mas não a utilizamos em nenhum momento nesse código. Então podemos simplesmente removê-la, assim como fizemos no comando switch. A substituiremos pelo underline, _:
+
+for _ in 1...10 {
+    print("Eu amo a linguagem Swift")
+}COPIAR CÓDIGO
+Executando esse código, nossa mensagem continuará sendo exibida dez vezes no console. Mas, agora, sem armazenar o índice desse loop.
+
+Se você verificar a aba direita do playground, há um aviso de quantas vezes esse código foi repetido: "(10 times)", ou "10 vezes" em português.
+
+@@03
+Loops while e repeat while
+
+Vamos comentar esse código e seguir adiante.
+Para comentar o código nessa linguagem, usamos /* no começo e */ no fim.
+/*for _ in 1...10 {
+    print("Eu amo a linguagem Swift")
+}*/COPIAR CÓDIGO
+Agora, esse bloco de código não possui nenhum efeito sobre a execução. Se o executarmos, o console ficará limpo.
+
+Loop com while
+Em seguida, faremos o mesmo que fizemos na aula anterior. Mas, agora, utilizaremos o laço de repetição while, que significa "enquanto".
+
+Nesse laço, precisamos de uma variável. Vamos criar uma que chamaremos de count, e a igualaremos a um:
+
+var count = 1COPIAR CÓDIGO
+Isso porque precisamos ter uma condição no while. A nossa condição é: enquanto a variável count for menor ou igual a 10, exibimos "Eu amo a linguagem Swift". Então:
+
+var count = 1
+
+while count <= 10{
+    print("Eu amo a linguagem Swift")
+}COPIAR CÓDIGO
+Mas, se executarmos esse código, cairemos num loop infinito; afinal, nunca alteramos o valor da variável count.
+
+É preciso tomar muito cuidado com loops infinitos no seu código!
+Então, a cada execução, precisamos aumentar em 1 o valor da variável count. Para isso, escrevemos count +=1:
+
+var count = 1
+
+while count <= 10{
+    print("Eu amo a linguagem Swift")
+}COPIAR CÓDIGO
+Se executarmos esse código, a mensagem "Eu amo a linguagem Swift" será exibida dez vezes no console. Podemos verificar que esse laço foi executado dez vezes também na aba direita do playground.
+
+Então, vamos comentar o while e seguir adiante para ver outro laço de repetição.
+
+Loop com repeat while
+O repeat while funciona da seguinte forma: escrevemos o repeat, abrimos o bloco de código para inserir a execução que se repetirá (a impressão da mensagem) e, no final, escrevemos while para escrever a condição de repetição (a mesma de antes):
+
+repeat { 
+    print("Eu amo a linguagem Swift")
+} while count <= 10COPIAR CÓDIGO
+Executando esse código, veremos a mensagem exibida dez vezes no console.
+
+Qual a diferença entre while e repeat while?
+A diferença entre os dois métodos é que o while realiza primeiro a verificação da condição; no caso, count ser menor ou igual a 10. Se o count fosse igual a 11, ele nunca entraria nessa condição.
+
+Vamos comentar o nosso repeat while e "descomentar" o while só para fazer um teste, igualando a variável como 11:
+
+var count = 11
+
+while count <= 10{
+    print("Eu amo a linguagem Swift")
+}COPIAR CÓDIGO
+Ao executar o código, nada aparece no nosso console. Afinal, primeiro foi feita a verificação. É como se ele dissesse: "olha, o count não é menor ou igual a 10, então sequer executarei qualquer coisa que esteja aqui dentro".
+
+Já o repeat while é um pouco diferente, então vamos "descomentá-lo" e comentar o while novamente:
+
+var count = 11
+
+/*while count <= 10{
+    print("Eu amo a linguagem Swift")
+}*/
+
+repeat { 
+    print("Eu amo a linguagem Swift")
+} while count <= 10COPIAR CÓDIGO
+Ao executar o código, a mensagem "Eu amo a linguagem Swift" é exibida uma única vez no console. Isso porque a primeira execução realiza qualquer coisa que estiver dentro do repeat, e só depois é feita a verificação.
+
+Quando usar for, while e repeat while?
+Não existe uma resposta muito certa para essa pergunta.
+
+Mas, muitas vezes utilizamos o for quando sabemos exatamente quantas vezes executaremos um bloco de código. Esse é o caso do nosso for. Sabemos que repetiremos a impressão da mensagem dez vezes, porque estamos utilizando o intervalo de valores.
+
+No while e repeat while, geralmente não sabemos exatamente quantas vezes o código será executado (com exceção do nosso exemplo).
+
+Exemplo prático
+Vamos apagar todo o nosso código e realizar uma soma de todos os valores entre um e dez. Para isso, vamos criar uma variável soma e inicializá-la como zero.
+
+Nesse caso, também podemos usar qualquer uma das três formas de laço. Então, vamos criar novamente um for com a variável i para armazenar o estado atual do loop. Depois, com o in, criamos o intervalo de valores de um a dez.
+
+Em seguida, somamos a variável i à variável soma, usando o operador de atribuição composto +=. Com isso, somaremos cada elemento desse loop.
+
+Por fim, vamos exibir no console o resultado final da soma. Então, nosso código fica assim:
+
+var soma = 0
+
+for i in 1...10 { 
+    soma += i
+} 
+print(soma)COPIAR CÓDIGO
+Ao executar esse código, o número 55 é exibido no console. Ou seja, a soma de todos os elementos entre um e dez é igual a 55.
+
+Gráfico de estados da variável soma
+Fizemos esse exemplo para entender melhor o comando for e, também, para ver uma funcionalidade interessante do Xcode.
+
+Na aba lateral direita do playground, podemos clicar no quadrado do início da linha que mostra a quantidade de vezes que o código foi executado ("(10 times)"). Com isso, será mostrado um gráfico abaixo da nossa operação de soma no código:
+
+captura de tela do código na plataforma Xcode. abaixo de "soma += i", um quadrado contendo uma linha curva diagonal crescente, com dez pontos ao longo de sua extensão.
+
+Clicando em cada ponto desse gráfico, conseguimos ver o valor da variável soma a cada vez execução do código
+
+No primeiro ponto, quando o i é igual a 1, soma também será igual a 1, porque a inicializamos com 0. No segundo ponto, soma é igual a 3, porque o i é igual a 2 e somou com o 1 que já estava na variável soma. E assim segue até chegar na décima execução, cujo estado de soma é igual a 55.
+
+Essa funcionalidade do Xcode é muito útil!
+
+@@04
+Qual o valor final da variável soma?
+
+Até aqui conhecemos sobre o controle de fluxo em Swift, ou seja, a criação de loopings com for, while e repeat while.
+Assim, observe o código abaixo, prestando atenção na soma final do repeat.
+
+var soma = 1
+var count = 0
+repeat {
+    soma += 3
+    count += 1
+} while(count < 5)
+
+print(soma)COPIAR CÓDIGO
+Considerando o código, qual será o valor da soma?
+
+Considerando o código, qual será o valor da soma?
+
+Alternativa correta
+18
+ 
+Alternativa correta
+12
+ 
+Alternativa correta
+16
+ 
+O loop percorre 5 vezes. Como em cada execução ele adiciona 3 na variável soma, que já está inicializada com 1, o valor final é 16.
+Alternativa correta
+15
+ 
+Parabéns, você acertou!
+ DISCUTIR NO FORUM
+
+@@05
+Entendendo os termos break e continue em Swift
+
+Agora, veremos outra funcionalidade: o uso das palavras break e continue dentro de laços de repetição.
+Então, vamos apagar todo o nosso código e, novamente, criar uma variável chamada count, inicializando-a com 1: var count = 1.
+
+Em seguida, criamos um laço de repetição com while, enquanto o count for menor ou igual a dez: while count <= 10.
+
+Comando break
+Faremos o seguinte: se a variável count chegar no valor 5 (if count == 5, queremos sair imediatamente do loop. Para isso, utilizamos a palavra-chave break.
+
+Então, imprimimos no console o valor de count (print(count)) e somamos um à variável para não entrar no loop infinito (count += 1).
+
+Teremos:
+
+var count = 1
+
+while count <= 10 { 
+    if count == 5 { 
+            break
+    } 
+    print(count) 
+    count += 1
+}COPIAR CÓDIGO
+Ao executar esse código, os números de 1 a 4 são exibidos no console, cada um em uma linha. Ao chegar no 5, ele sai do laço de repetição.
+
+Comando continue
+Essa palavra-chave força a próxima iteração do loop.
+
+Para fins explicativos, vamos alterar a posição de count += 1 no código, colocando-o logo acima do if. Então, trocamos a palavra break para continue:
+
+var count = 1
+
+while count <= 10 {
+    count += 1
+    if count == 5 { 
+            continue
+    } 
+    print(count) 
+}COPIAR CÓDIGO
+Ao executar esse código, o número 5 não é impresso - de 4, foi direto para o 6. O 11 foi impresso porque mudamos a ordem da execução do count += 1.
+
+Ou seja, ele entrou na verificação e "falou": se o count for 5, você dá um continue, força a próxima iteração do loop. Então, o print não será executado caso o count for igual a 5.
+
+Conclusões
+Você aprendeu mais sobre laços de repetição com for, while e repeat while. Na próxima aula, continuaremos os estudos da nossa linguagem utilizando opcionais e funções.
+
+Nos encontramos lá!
+
+@@06
+Desafios de loops - Imprimir números pares
+
+Agora que você já aprendeu sobre os laços de repetição e intervalos de valores, o seu desafio é desenvolver um código que vá do número 1 até o número 10, imprimindo no console apenas os números pares desse intervalo, ou seja, será imprimido apenas os valores 2, 4, 6, 8, e 10.
+Vamos lá?
+
+Para resolver o desafio, você pode ter desenvolvido algo como:
+for i in 1...10 {
+  if i % 2 == 0 {
+    print(i)
+  }
+}COPIAR CÓDIGO
+Observação: não se preocupe se seu código ficou muito diferente do meu, existem diversas maneiras de chegar em um mesmo resultado. Apenas certifique-se de que você está escrevendo um código legível, com nomes bem definidos, etc.
+
+@@07
+O que aprendemos?
+
+Nessa aula, você aprendeu sobre:
+Produzir loops com for, while e repeat while;
+Como encerrar um loop com o termo break e partir para a próxima execução desse mesmo loop com o termo continue.
+Concluímos a Aula 3! Se tiver alguma dúvida, não deixe de aparecer lá no fórum ou também no nosso servidor do Discord.
+
+Nos vemos na próxima aula!
