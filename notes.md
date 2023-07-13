@@ -1791,3 +1791,526 @@ Como encerrar um loop com o termo break e partir para a próxima execução dess
 Concluímos a Aula 3! Se tiver alguma dúvida, não deixe de aparecer lá no fórum ou também no nosso servidor do Discord.
 
 Nos vemos na próxima aula!
+
+####13/07/2023
+
+@04 Funcoes e opcionais
+
+@@01
+Projeto da aula anterior
+
+Foi criado um playground com exemplos similares ao que vimos na aula anterior. Você pode ir acompanhando o passo a passo do desenvolvimento do nosso código no Github e, caso deseje, pode baixar o código da aula anterior.
+Observação: O código fica dentro do arquivo “Contents.swift”, dentro de cada pasta do Playground.
+Bons estudos!
+
+@@02
+Conhecendo as funções
+
+Agora vamos entender o conceito de função.
+Função é um bloco de código que executa alguma tarefa. É extremamente importante para modularização, organização e reutilização do seu código. Visto que uma vez que definimos uma função, podemos chamá-la em diferentes partes do código.
+
+Se quisermos, por exemplo, criar uma função que some dois números. Como podemos fazer isso?
+
+Vamos criar uma função utilizando a palavra-chave func seguida do nome da função, que chamaremos de soma. Depois, abre e fecha parênteses e abre e fecha chaves. Tudo que for relacionado a essa função escreveremos dentro das chaves.
+
+func soma() {
+
+}COPIAR CÓDIGO
+Colocaremos uma variável chamada resultado, colocaremos um código somando 2 mais 3. Vamos inserir também um print(resultado) e podemos executar esse código.
+
+func soma() {
+    var resultado = 2 + 3
+    print(resultado)
+}COPIAR CÓDIGO
+Ao executar, não aconteceu nada porque ainda não estamos chamando essa função. Para chamar uma função devemos escrever o nome da função e abrir e fechar parênteses.
+
+soma()COPIAR CÓDIGO
+Ao executar o código novamente, será exibido no console o número 5 que é o resultado de 2 mais 3.
+
+func soma() {
+    var resultado = 2 + 3
+    print(resultado)
+}
+
+soma()COPIAR CÓDIGO
+5
+Parâmetros da função
+Mas não faz sentido inserir os número 2 e 3 dentro da função, pois nós mesmos queremos definir os valores que usaremos. Queremos passar argumentos para essa função, queremos que ela receba parâmetros. Como fazer isso?
+
+Podemos definir parâmetros dentro dos parênteses da função soma(). Vamos inserir o parâmetro numero1 e precisamos definir o tipo de dado que receberemos, o tipo será inteiro: numero1: Int. Vamos inserir os parâmetros numero1 e numero2 separados por vírgulas, ambos serão inteiros.
+
+No resultado, em vez de 2 + 3, colocaremos numero1 + numero2.
+
+func soma(numero1: Int, numero2: Int) {
+    var resultado = numero1 + numero2
+    print(resultado)
+}
+
+soma()COPIAR CÓDIGO
+Agora, ao chamar a função, precisamos passar os parâmetros que definimos passando o valor que quisermos.
+
+soma(numero1: 5, numero2: 3)COPIAR CÓDIGO
+Então, ao executar esse código o resultado será 3, porque 5 mais 3 é igual a 8.
+
+func soma(numero1: Int, numero2: Int) {
+    var resultado = numero1 + numero2
+    print(resultado)
+}
+
+soma(numero1: 5, numero2: 3)COPIAR CÓDIGO
+8
+Note que, ao chamar essa função, precisamos escrever numero1 e numero2. Existe uma maneira de passarmos apenas os valores, ou seja, omitir o nome dos parâmetros.
+
+Para isso, basta colocar um underline (_) seguido de um espaço antes do nome do parâmetro da função. Faremos isso tanto para numero1 quanto para numero2. Agora, na hora de chamar a função soma(), podemos escrever apenas os valores 5 e 3.
+
+func soma(_ numero1: Int, _ numero2: Int) {
+    var resultado = numero1 + numero2
+    print(resultado)
+}
+
+soma(5, 3)COPIAR CÓDIGO
+8
+Do mesmo modo que podemos omitir o nome do parâmetro, também podemos colocar um nome diferente para quando enviamos um argumento.
+
+No parâmetro numero2, vamos substituir o underline por com. Ao chamar essa função, podemos colocar o nome desse argumento como com. Dá um sentido diferente sobre como estamos enviando essas informações. Podemos fazer isso para deixar o código mais legível. Dentro da função ela ainda continua como numero1 mais numero2, mas é uma forma diferente de chamar o parâmetro.
+
+func soma(_ numero1: Int, com numero2: Int) {
+    var resultado = numero1 + numero2
+    print(resultado)
+}
+
+soma(5, com: 3)COPIAR CÓDIGO
+Nesse caso até que não faz muito sentido, mas é só para servir como exemplo de que é possível mudar o nome do argumento. No Swift, isso é chamado de "argument label".
+
+Vamos deixar sem o com e voltar a colocar o underline. Manteremos a omissão do nome do parâmetro.
+
+func soma(_ numero1: Int, _ numero2: Int) {
+    var resultado = numero1 + numero2
+    print(resultado)
+}
+
+soma(5, 3)COPIAR CÓDIGO
+Retornar valor de uma função
+Para retornar o valor de uma função, precisamos inserir o sinal de hífen seguido do sinal de maior que ->, esses dois caracteres juntos lembram uma flecha mesmo. Vamos inserir isso após o parênteses de fechamento dos parâmetros da função.
+
+func soma(_ numero1: Int, _ numero2: Int) -> {COPIAR CÓDIGO
+Em seguida, precisamos especificar qual é o tipo do retorno dessa função. Aqui queremos retornar a soma desses valores. A soma é um número inteiro, então vamos escrever Int. Em vez de apenas usar o print para exibir o resultado no console, vamos retornar o resultado utilizando a palavra-chave return.
+
+func soma(_ numero1: Int, _ numero2: Int) -> Int {
+    var resultado = numero1 + numero2
+    return resultado
+}
+
+soma(5, 3)COPIAR CÓDIGO
+Agora, ao chamar essa função, podemos atribuir um valor à chamada da função porque, na verdade, estaremos atribuindo valor ao retorno dessa função. Podemos escrever o seguinte:
+
+var soma = soma(5, 3)
+print(soma)COPIAR CÓDIGO
+Ao executarmos o código vai dar erro, porque não podemos usar o mesmo nome para a variável e a função, elas precisam ser diferentes. Então, em vez de variável soma, teremos uma variável resultadoe, no print(), exibiremos resultado.
+
+func soma(_ numero1: Int, _ numero2: Int) -> Int {
+    var resultado = numero1 + numero2
+    return resultado
+}
+
+var resultado = soma(5, 3)
+print(resultado)COPIAR CÓDIGO
+8
+Agora nosso código está funcionando corretamente.
+
+Podemos fazer várias coisas com funções, ter parâmetros diferentes e diferentes tipos de retorno.
+
+Booleano
+Vamos criar um outro exemplo, neste código vamos verificar se uma pessoa é adulta ou não.
+
+Criaremos uma função chamada verificaAdulto passando idade como parâmetro. Vamos passar com um underline para podermos escrever apenas o valor.
+
+func verificaAdulto(_idade: Int)COPIAR CÓDIGO
+Em seguida, vamos retornar um booleano representando verdadeiro ou falso.
+
+func verificaAdulto(_idade: Int) -> Bool {
+
+}COPIAR CÓDIGO
+Dentro das chaves vamos dar um return com idade maior ou igual a 18.
+
+func verificaAdulto(_idade: Int) -> Bool {
+    return idade >= 18
+}COPIAR CÓDIGO
+Se chamarmos a função verificaAdulto passando a minha idade, 22, será exibido no painel ao lado direito o valor verdadeiro, true.
+
+func verificaAdulto(_idade: Int) -> Bool {
+    return idade >= 18
+}
+
+verificaAdulto(22)COPIAR CÓDIGO
+true
+O retorno dessa função é true (verdadeiro) porque 22 é maior que 18. E se passarmos verificaAdulto com o valor de 17 teremos o retorno false.
+
+func verificaAdulto(_idade: Int) -> Bool {
+    return idade >= 18
+}
+
+verificaAdulto(22)
+verificaAdulto(17)COPIAR CÓDIGO
+Note que podemos chamar a função quantas vezes quisermos.
+
+Esse foi o vídeo sobre função. No próximo vídeo falaremos sobre opcionais em Swift!
+
+https://developer.apple.com/forums/thread/92288
+https://docs.swift.org/swift-book/documentation/the-swift-programming-language/functions/
+
+@@03
+Para saber mais: funções com parâmetros in-out
+
+Eu não sei se percebeu, mas não é possível alterar o valor de um parâmetro recebido em uma função. Você vai receber um erro se executar o código abaixo:
+func somaNumero(_ numero: Int) {
+    numero += 1
+    print(numero)
+}
+somaNumero(10)COPIAR CÓDIGO
+E por qual motivo dá erro alterar o valor de um parâmetro recebido em uma função?
+
+Isso acontece pois os parâmetros de uma função são recebidos como uma constante, ou seja, não podem ser modificados.
+
+Há uma maneira para alterarmos esse comportamento, e ela é chamada de copy-in copy-out. Aqui entra o conceito de passagem de parâmetros por valor e passagem por referência.
+
+Não vamos entrar muito nesse assunto. Por agora, tenha em mente que quando há passagem de parâmetros por valor, estamos enviando uma cópia independente desse valor. Quando há passagem de parâmetros por referência, estamos enviando o endereço de memória em que a variável está alocada, por esse motivo se a variável for alterada dentro do escopo da função, ela será modificada fora do escopo também.
+
+Para usar a passagem de parâmetro por referência, usamos uma palavra chave chamada de inout antes do tipo do parâmetro. E então, quando enviamos uma variável como argumento, precisamos usar o símbolo & antes do nome da variável.
+
+Ficou difícil? Veja o código abaixo e entenda melhor:
+
+func somaNumero(_ numero: inout Int) {
+    numero += 1
+    print(numero)
+}
+var valor = 10
+somaNumero(&valor)
+print(valor) // será exibido 11COPIAR CÓDIGO
+Perceba que mesmo alterando a variável dentro da função, essa alteração será refletida fora da função pois passamos o parâmetro por referência.
+
+Importante observar que a variável precisa ser declarada como var, e não pode ser declarada como uma constante, pois então seu valor não pode ser alterado.
+
+@@04
+Entendendo opcionais em Swift
+
+Agora, vamos aprender sobre opcionais, uma funcionalidade extremamente utilizada na linguagem Swift.
+Sabe quando você está fazendo cadastro em alguma aplicação e chega na parte de telefone e celular? Muitas vezes o telefone não é obrigatório, ele é um valor opcional visto que a maioria das pessoas não possui mais um telefone fixo em suas residências. Porém, o número do celular continua sendo um valor obrigatório.
+
+No Swift, há uma maneira de representarmos um dado de maneira opcional também.
+
+No código, vamos criar uma variável chamada telefone e definiremos o tipo como sendo uma string. Logo após a palavra string colocaremos um ponto de interrogação para representar uma opcional.
+
+var telefone: String?COPIAR CÓDIGO
+Imagine uma opcional como sendo uma caixa que pode ou não conter algo.
+
+Agora, vamos exibir a variável telefone no console.
+
+var telefone: String?
+print(telefone)COPIAR CÓDIGO
+nil
+Ao executar esse código, no console foi exibido o valor nil, isso significa algo nulo, inexistente. Portanto, a opcional pode ter algum valor ou pode ser nula.
+
+Agora, logo após a declaração da variável, vamos atribuir um valor para simular o número de um telefone.
+
+var telefone: String?
+telefone = "99999999"
+print(telefone)COPIAR CÓDIGO
+Ao executarmos esse código teremos o seguinte retorno:
+
+Optional("99999999")
+O valor dessa variável está "embrulhado" em algo chamado optional. Não é o valor concreto dessa variável. Para utilizarmos o valor concreto dela, precisamos desembrulhar essa variável. Em breve veremos como fazer isso.
+
+Vou dar um exemplo mais prático de como o Swift retorna um valor opcional mesmo que não tenhamos declarado nenhum valor opcional. Veja o seguinte exemplo.
+
+Vamos criar uma variável chamada numeroEmString e atribuiremos uma string com o número 45. Em seguida, criaremos uma variável chamada numero e faremos uma conversão da string para um número inteiro:
+
+var numeroEmString = "45"
+var numero = Int(numeroEmString)COPIAR CÓDIGO
+Vamos exibir a variável numero no console.
+
+var numeroEmString = "45"
+var numero = Int(numeroEmString)
+print(numero)COPIAR CÓDIGO
+Optional (45)
+Essa operação retorna um valor opcional, porque o Swift não sabe exatamente se vai conseguir converter aquela string em número. Como colocamos 45 ele conseguiu converter porque é um número, mas se escrevermos alguma palavra ele vai retornar nulo.
+
+Então, mesmo não tendo declarado nenhuma variável como opcional, a operação de converter uma string em um inteiro produz um resultado opcional justamente para garantir a segurança do seu código.
+
+Agora vamos apagar esse exemplo e focar apenas no exemplo do telefone.
+
+Existem diferentes métodos para desembrulhar uma variável. Primeiro, começaremos por um método que não é recomendado e veremos porque ele não é recomendado. Esse método força o desembrulho. Basicamente, falamos assim para o Swift: "Eu tenho certeza que tem um valor aqui dentro, então você pode desembrulhar essa opcional".
+
+Para forçar o desembrulho nós usamos um ponto de exclamação logo após a variável no print().
+
+var telefone: String?
+telefone = "99999999"
+print(telefone!)COPIAR CÓDIGO
+Ao executar o código teremos o valor concreto sendo exibido no console:
+
+99999999
+Mas, se comentarmos a linha que declara esse valor, telefone = "99999999".
+
+var telefone: String?
+//telefone = "99999999"
+print(telefone!)COPIAR CÓDIGO
+Ao executar o código teremos um erro de execução. Esse é um dos piores erros que poderíamos ter em uma aplicação, porque é esse erro que acontece quando o aplicativo fecha de repente, nenhuma pessoa usuária gosta dessa experiência.
+
+Esse erro aconteceu porque o valor da variável é nil.
+
+@@05
+Lidando com opcionais
+
+Como aprendemos no vídeo anterior, nós precisamos de maneiras mais seguras para fazer o desembrulho de uma opcional.
+Vamos deixar apenas essas duas linhas no nosso código:
+
+var telefone: String?
+telefone = "99999999"COPIAR CÓDIGO
+Ainda podemos forçar o desembrulho, mas de uma maneira mais segura. Podemos inserir uma condição. Se o telefone for diferente de nulo, podemos usar o ponto de exclamação (!), que significa o desembrulho dessa variável.
+
+var telefone: String?
+telefone = "99999999"
+
+if telefone != nil {
+    print(telefone!)
+}COPIAR CÓDIGO
+Ao executar esse código o valor estará desembrulhado.
+
+99999999
+if let - Optional Binding
+Outra maneira de desembrulhar uma opcional é utilizar if let como no código abaixo:
+
+if let telefoneDesembrulhado = telefone {
+
+}COPIAR CÓDIGO
+Com isso estamos criando uma variável local que só será utilizada dentro do escopo de telefoneDesembrulhado. Ele só cria essa variável se a nossa opcional for diferente de nil, se ela tiver algum valor. Dentro desse if let vamos exibir no console o telefoneDesembrulhado.
+
+var telefone: String?
+telefone = "99999999"
+
+if telefone != nil {
+    print(telefone!)
+}
+
+if let telefoneDesembrulhado = telefone {
+    print(telefoneDesembrulhado)
+}COPIAR CÓDIGO
+99999999
+99999999
+
+Ao executar, veremos que funcionou sem nenhum problema.
+
+Lembre-se de que essa variável telefoneDesembrulhado só existe dentro do escopo do if let, se a chamarmos fora desse escopo teremos um erro.
+
+Uma prática comum, é escrever apenas if let nome da variável igual ao nome da variável: if let telefone = telefone.
+
+if let telefone = telefone {
+    print(telefone)
+}COPIAR CÓDIGO
+Dentro do if let é possível criar múltiplas condições.
+
+Podemos criar uma variável celular opcional e atribuir um número a ela, em seguida escrever uma condicional dentro do if let para a opcional celular que criamos.
+
+var telefone: String?
+telefone = "99999999"
+
+if telefone != nil {
+    print(telefone!)
+}
+
+var celular: String?
+celular = "888888"
+
+if let telefone = telefone,
+    let celular = celular {
+    print(telefone)
+}    print(celular)COPIAR CÓDIGO
+99999999
+99999999
+
+888888
+
+Ao executar, ele exibiu os números de telefone e de celular no console.
+
+Caso celular seja nil, ou seja, se apagarmos a linha celular = "888888", ele não será exibido no console porque não para ser exibida a variável precisa ser diferente de nil.
+
+guard let
+Outra forma de desembrulhar uma opcional é usando o guard let, que é muito usado em funções com overemos a seguir.
+
+Vamos criar uma função chamada autenticar que receberá usuario e senha, ambas do tipo string opcional. Dentro dessa função escreveremos guard let usuario igual a usuario, vírgula, senha igual a senha.
+
+Caso algum seja nulo, usaremos um else { return } para sair da função.
+
+func autenticar(usuario: String?, senha: String?) {
+    guard let usuario = usuario, let senha = senha
+    else {return}
+}COPIAR CÓDIGO
+Diferente do if let, no guard let podemos usar as variáveis em qualquer lugar do código. Como estamos dentro de uma função, só será usada dentro dessa função. Vamos exibir usuario e senha no console.
+
+func autenticar(usuario: String?, senha: String?) {
+    guard let usuario = usuario, let senha = senha
+    else {return}
+    print(usuario)
+    print(senha)
+}COPIAR CÓDIGO
+Podemos chamar a função autenticar e inserir o usuário "joaosilva" e senha "1234".
+
+func autenticar(usuario: String?, senha: String?) {
+    guard let usuario = usuario, let senha = senha
+    else {return}
+    print(usuario)
+    print(senha)
+
+    autenticar(usuario: "joaosilva", senha:"1234")
+}COPIAR CÓDIGO
+ao executar esse código teremos:
+
+joaosilva
+
+1234COPIAR CÓDIGO
+Caso a senha fosse um valor nulo, ele sairia dessa função e nada seria exibido no console.
+
+Optional chaining
+Outra forma de desembrulhar o opcional é usar o optional chaining, ele é muito utilizado com o optional binding. O termo "chaining" em português significa encadeamento, a ideia é encadear as operações. Vamos entender isso na prática.
+
+Se quisermos pegar o primeiro caractere do telefone, como podemos fazer isso?
+
+Podemos usar no telefone uma propriedade chamada first. Ao selecionarmos a propriedade first, ele automaticamente adiciona uma interrogação ao final de telefone, porque só é possível pegar o primeiro caractere de telefone se realmente existir algum valor nele.
+
+print(telefone?.first)COPIAR CÓDIGO
+Ao executar o código, o caractere aparecerá dentro de uma optional.
+
+Optional("9")
+Para exibir somente o caractere, podemos criar um if let primeiroCaractere com telefone?.first.
+
+if let primeiroCaractere = telefone?.first {
+    print(primeiroCaractere)
+}COPIAR CÓDIGO
+Ao executar esse código teremos:
+
+9
+Operador de coalescência nula
+Por fim, a última forma que temos para desembrulhar opcional é o nil coalescing operator, operador de coalescência nula.
+
+Na última linha do código, vamos exibir a variável telefone no console e fazer uma verificação com dois pontos de interrogação.
+
+Se não tiver nenhum valor dentro da variável telefone, vamos escrever a mensagem "Não há valor para telefone". Vamos comentar a linha 2, telefone = "99999999" que inicializa a variável, para ver se a nossa mensagem aparece.
+
+print(telefone ?? "Não há valor para telefone")COPIAR CÓDIGO
+Ao executarmos o código, nossa mensagem aparecerá no console:
+
+Não há valor para telefone
+Está acontecendo uma verificação. Exibe no console se existir algum valor para telefone, senão, exiba qualquer outra coisa. No caso definimos que deveria exibir a mensagem "Não há valor para telefone".
+
+Conclusão
+Nesse vídeo aprendemos sobre como criar e desembrulhar opcionais. Te espero na próxima aula, para começarmos a aprender sobre coleções!
+
+@@06
+Para saber mais: artigo completo sobre opcionais
+
+Aqui na Alura, temos um artigo produzido sobre opcionais. Caso seja do seu interesse ler e complementar seus estudos, você pode acessá-lo aqui.
+Bons estudos!
+
+https://www.alura.com.br/artigos/ios-opcionais-swift?_gl=1*1bu6eys*_ga*MTgwMzIzMjk2Ni4xNjg4ODE5OTcz*_ga_59FP0KYKSM*MTY4OTI3MjY0NS4xMC4xLjE2ODkyNzQ3NjkuMC4wLjA.*_fplc*V2syWE5vb3glMkZWSmtRU0JYdlRyUmJGY2Z0TWhWeUZHT2FxbkptQ0NsbGRKb0xxNTAzOW9oS1Y4dVR6QVFEeUZ4RWFRNHRqbGtoZHd4eW9VNG5vbSUyQk54RHRlRUJNdnhFbyUyQlN0dFBIUVl3ZmhndUhnSkRHTGJXUkNzbjEzWCUyRmclM0QlM0Q.
+
+https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics/
+
+@@07
+Valor final da variável soma?
+
+té aqui, vimos sobre função e opcionais. Como entendemos que você já conhece um pouco sobre funções, vamos nos focar nos opcionais - que são mais específicos do Swift.
+Um amigo pediu ajuda com a revisão de um trecho de código que ele escreveu! Observe abaixo atentamente:
+
+let numero: String = "10"
+let inteiro = Int(numero)
+print(inteiro + 1)COPIAR CÓDIGO
+Se rodarmos esse código no terminal, qual resultado vai acontecer?
+
+
+Alternativa correta
+Será exibido, no console, o valor 12.
+ 
+Alternativa correta
+Ocorrerá um erro na execução desse código, já que como não é seguro dizer que a conversão irá funcionar, será retornado uma opcional para a constante inteiro, e não é possível realizar operações com valores opcionais.
+ 
+Você precisa desembrulhar essa opcional em primeiro lugar; só depois é possível realizar operações com ela.
+Alternativa correta
+Como não é seguro dizer que a conversão irá funcionar, ele não consegue realizar a operação de soma, logo será exibido no console apenas o valor inicial que é 10.
+ 
+Alternativa correta
+Será exibido, no console, o valor 11.
+ 
+Como não é seguro dizer que a conversão de uma String para um número inteiro irá funcionar, o Swift vai retornar uma opcional para a constante inteiro, e não é possível realizar operações, como por exemplo aritméticas, com valores opcionais, será necessário desembrulhar essa opcional antes.
+
+@@08
+Desafio: praticando funções e opcional
+
+Aprendemos sobre funções e opcionais. Agora é sua vez de praticar, e para isso, vou propor dois desafios! Vamos lá?
+Desafio 1 - Colocando a função para funcionar
+Escreva uma função que receba um parâmetro do tipo Int e verifique se esse número é primo ou não. O retorno dessa função pode ser um booleano, representando true se for primo ou false se não for primo.
+
+Lembrando que um número primo é aquele que é dividido apenas por um e por ele mesmo.
+Desafio 2 - Função com opcional
+Crie uma função que receba um parâmetro que representa o nome de uma pessoa. Esse parâmetro é um **opcional**, ou seja, ele pode conter um valor ou ser nulo.
+Faça o tratamento correto dessa opcional:
+Caso seja nulo, exiba no console “Nome não especificado”;
+Caso contenha algum valor, exiba no console esse valor.
+Desafio 3 - Indo ao restaurante
+Imagine que você foi ao restaurante com um quantidade “n” de amigos e gastaram ao total um valor x. Faça um programa que contenha uma função que calcule quanto cada pessoa deva pagar.
+
+A função deve receber dois parâmetros: o valor total da conta e o número total de pessoas que irão dividir a conta;
+Não se esqueça dos 10% do garçom! Faça o cálculo em cima do valor total;
+Retorne quanto cada pessoa deve pagar e exiba esse valor no console, fora da função.
+Exemplo: a conta total deu R$120,00 e foram 4 pessoas no total. Calculando 10% em cima de R$120,00, o valor final ficará R$132,00. Dividindo esse valor por 4, cada pessoa deve pagar um total de R$33,00.
+
+Opinião do instrutor
+
+No exercício 1, você pode ter desenvolvido algo como:
+func primo(_ number: Int) -> Bool {
+   let start = 2
+   for i in start..<number {
+       if number % i == 0 { 
+                 return false 
+             }
+   }
+   return true
+}
+primo(6) // false
+primo(7) // trueCOPIAR CÓDIGO
+Enquanto no exercício 2, cheguei nessa conclusão:
+
+func mostraNome(nome: String?) {
+    guard let nome = nome else {
+        print("Nome não identificado")
+        return
+    }
+    print(nome)
+}
+mostraNome(nome: "Giovanna")
+mostraNome(nome: nil)COPIAR CÓDIGO
+E por fim, no exercício 03, cheguei nessa conclusão:
+
+func divideConta(_ total: Double, _ numeroPessoas: Int) -> Double {
+  let valorComTaxa = total * 1.1
+  return valorComTaxa / Double(numeroPessoas) // É necessário transformar em Double pois não é possível fazer uma divisão Double com Int, precisa ser Double e Double ou Int e Int
+}
+
+let totalParaCadaPessoa = divideConta(120, 4)
+print(totalParaCadaPessoa)COPIAR CÓDIGO
+Observação: não se preocupe se seu código ficou muito diferente do meu, existem diversas maneiras de chegar em um mesmo resultado. No exercício 01 por exemplo, você pode ter resolvido utilizando outros comandos do loop.
+
+Apenas certifique-se de que você está escrevendo um código legível, com nomes bem definidos, etc.
+
+@@09
+O que aprendemos?
+
+Nessa aula, você aprendeu sobre:
+Compreender e escrever funções;
+Entender e produzir funções com parâmetros e/ou retornos;
+Lidar com parâmetros opcionais;
+Aplicar as melhores técnicas para lidar com uma opcional.
+Concluímos a Aula 4! Se tiver alguma dúvida, não deixe de aparecer lá no fórum ou também no nosso servidor do Discord.
+
+Por que não ajudar a responder a uma dúvida? Explicar um assunto para alguém é uma ótima forma de aprender e consolidar o conhecimento!
+
+Nos vemos na próxima aula!
