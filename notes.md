@@ -2314,3 +2314,738 @@ Concluímos a Aula 4! Se tiver alguma dúvida, não deixe de aparecer lá no fó
 Por que não ajudar a responder a uma dúvida? Explicar um assunto para alguém é uma ótima forma de aprender e consolidar o conhecimento!
 
 Nos vemos na próxima aula!
+
+####14/07/2023
+
+@05-Colecoes
+
+@@01
+Projeto da aula anterior
+
+Foi criado um playground com exemplos similares ao que vimos na aula anterior. Você pode ir acompanhando o passo a passo do desenvolvimento do nosso código no Github e, caso deseje, pode baixar o código da aula anterior.
+Observação: O código fica dentro do arquivo “Contents.swift”, dentro de cada pasta do Playground.
+Bons estudos!
+
+https://github.com/alura-cursos/swift-entendendo-a-linguagem/tree/aula-04
+
+https://github.com/alura-cursos/swift-entendendo-a-linguagem/archive/refs/heads/aula-04.zip
+
+@@02
+Conhecendo arrays em Swift
+
+Agora, aprenderemos sobre coleções de valores, bastante utilizadas não apenas na linguagem Swift, mas também em qualquer outra linguagem de programação.
+Arrays
+Imagine que você quer armazenar as notas de determinado estudante na sua aplicação. Você não vai criar uma variável para cada nota, como nota1, nota2, nota3 e assim por diante. Isso não é eficiente!
+
+Você pode criar uma única variável que armazena uma coleção de notas. Veremos isso, na prática, no nosso código.
+
+Para criar um array, começamos a escrita como qualquer outra variável: var e o nome, que pode ser notas. Vamos igualar e abrir e fechar colchetes: var notas = [].
+
+Representamos um array com esses colchetes, pois um array é uma coleção de valores.
+Dentro dos colchetes, simplesmente escreveremos algumas notas, como 8.5, 9.0, 7.2 e 6.0, entre vírgulas:
+
+var notas = [8.5, 9.0, 7.2, 6.0] COPIAR CÓDIGO
+Se executarmos esse código, veremos na aba direita da tela a array com todos os valores.
+
+[8.5, 9, 7.2, 6]
+Se pressionarmos a tecla "Option", será exibida uma mensagem abaixo do código, dizendo que esse é um array do tipo "double", ou seja, de valores decimais.
+
+Importante: se é um array de valores decimais, não podemos ter nele nenhum valor de outro tipo. Por exemplo: não podemos inserir nesse array uma string com, por exemplo, o número seis ("6"):
+
+var notas = [8.5, 9.0, 7.2, 6.0, "6"] COPIAR CÓDIGO
+Isso causa um erro na nossa aplicação! Então vamos apagar essa string.
+
+O Swift definiu o tipo de valor do array de forma implícita, mas podemos definir de forma explícita, escrevendo Double entre colchetes antes do sinal de igual:
+
+var notas: [Double] = [8.5, 9.0, 7.2, 6.0] COPIAR CÓDIGO
+Arrays vazios
+Também podemos criar arrays inicialmente vazios. Então vamos criar mais uma variável, chamada arrayVazio, apenas para exemplificar:
+
+var arrayVazio = []COPIAR CÓDIGO
+Note que o Swift nos avisa que uma coleção vazia requer um tipo explícito. Então vamos definir o tipo, que pode ser String:
+
+var arrayVazio: [String] = []COPIAR CÓDIGO
+Outra maneira de inicializar o array vazio é igualar a variável à Array<> e escrever o tipo de dado dentro dos sinais de menor e maior. Em seguida, inicializamos com parênteses, significando ser um array vazio:
+
+var arrayVazio = Array<String>()COPIAR CÓDIGO
+Propriedade isEmpty
+Existem diferentes propriedades extremamente úteis no nosso array.
+
+Por exemplo: podemos verificar se um array está vazio ou não. Para isso, escrevemos o nome do array (notas), um ponto final e acessamos a propriedade isEmpty:
+
+notas.isEmptyCOPIAR CÓDIGO
+Ela retorna um valor booleano, indicando se a coleção está ou não vazia. Nesse caso, como inicializamos o array notas com diversos valores, ele não está vazio. Vemos a palavra "false" na aba direita do playground, referente a esse código.
+
+Mas, se aplicarmos essa propriedade no arrayVazio, temos o retorno "true".
+
+Propriedade count
+Podemos verificar quantos elementos existem dentro do array com a propriedade count:
+
+notas.countCOPIAR CÓDIGO
+Nesse caso, recebemos o número 4 na aba direita. Afinal, temos quatro elementos dentro desse array.
+
+Funções min e max
+Com essas propriedades, conseguimos verificar o menor e maior valores desse array. No caso de notas, para verificar a menor nota, escrevemos:
+
+notas.min()COPIAR CÓDIGO
+Assim, recebemos o número 6 na aba direita; ou seja, a nota 6 é a menor nota do estudante. Para verificar a maior nota, escrevemos:
+
+notas.max()COPIAR CÓDIGO
+Isso retorna número 9, a maior nota do estudante.
+
+Note que o count é uma propriedade, enquanto o min e o max são funções que retornam valores.
+Função contains()
+Essa função verifica se determinado elemento está ou não dentro da coleção. Vamos verificar se a array notas contém o elemento 8.5:
+
+notas.contains(8.5) COPIAR CÓDIGO
+Esse código retorna "true" porque, como sabemos, a nota 8,5 consta na coleção de valores. Se passarmos um valor que não existe, como 4.0, o código retornará "false".
+
+Função firstIndex()
+Com essa função, podemos descobrir o index de determinado elemento. Como parâmetros, passamos of junto do elemento a ser buscado:
+
+notas.firstIndex(of: 9.0)COPIAR CÓDIGO
+Esse código nos retornará o número 1, porque esse valor está no índice 1.
+
+Caso passarmos um elemento que não existe na coleção na função firstIndex(), como o número 10.0, o retorno do código é "nil". Ou seja, uma opcional.
+
+Observação: Acessando elementos no array
+Os elementos no array começam no índice zero. Dessa forma, 8.5 está no índice 0, 9.0 está no índice 1, 9.0 no índice 2 e 6.0 no índice 3.
+
+Então, para acessar elementos, escrevemos o nome do array, abrimos colchetes e inserimos o índice dentro:
+
+notas[0]COPIAR CÓDIGO
+O código acima, com o índice 0, nos retorna o elemento 8.5. Por isso, quando procuramos o index do valor 9.0, recebemos o número 1.
+
+@@03
+Aplicando métodos de array
+
+Existem alguns métodos para inserir ou remover um valor em um array. Para inserir um valor, utilizamos o método append() passando o elemento que desejamos inserir - por exemplo, o valor 10.0. Ao exibir no console o array notas, veremos que o valor 10.0 foi adicionado na última posição.
+
+notas.append(10)
+print(notas)COPIAR CÓDIGO
+[8.5, 9.0, 7.2, 6.0, 10.0]
+Também é possível definir em que posição um elemento será inserido. Para isso, usamos o método inset() passando o elemento que será inserido e o índex que desejamos que ele ocupe. Nesse teste, usaremos os valores 5.0 e 2, respectivamente. Exibindo no console, veremos que o elemento 5.0 foi inserido no índex desejado.
+
+notas.append(10)
+notas.insert(5.0, at: 2)
+print(notas)COPIAR CÓDIGO
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0]
+Também é possível inserir um elemento utilizando o operador de atribuição composto. Se simplesmente colocarmos notas += seguido de colchetes contendo o elemento em questão, por exemplo [8,2], o valor será inserido ao final do array.
+
+notas.append(10)
+notas.insert(5.0, at: 2)
+notas += [8.2]
+print(notas)COPIAR CÓDIGO
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0, 8.2]
+Removendo elementos a um array
+Mas como remover elementos de um array? Para isso, temos o método removeLast(), que remove o último elemento de um array e retorna o elemento removido. Para conferir o resultado, faremos um novo print(notas).
+
+notas.append(10)
+notas.insert(5.0, at: 2)
+notas += [8.2]
+print(notas)
+
+notas.removeLast()
+print(notas)COPIAR CÓDIGO
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0, 8.2]
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0]
+
+Perceba que o elemento 8.2 foi removido. Já se quisermos conferir que o método removeLast() retorna o elemento removido, podemos atribuí-lo a uma variável elementoRemovido e exibi-la no console.
+
+notas.append(10)
+notas.insert(5.0, at: 2)
+notas += [8.2]
+print(notas)
+
+var elementoRemovido = notas.removeLast()
+print(elementoRemovido)
+
+print(notas)COPIAR CÓDIGO
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0, 8.2]
+8.2
+
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0]
+
+Como esperado, o 8.2 é exibido, pois foi o último elemento removido do array. Também temos um método parecido, o removeFirst(), que removerá o primeiro elemento do array - nesse caso, 8.5.
+
+notas.append(10)
+notas.insert(5.0, at: 2)
+notas += [8.2]
+print(notas)
+
+var elementoRemovido = notas.removeFirst()
+print(elementoRemovido)
+
+print(notas)COPIAR CÓDIGO
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0, 8.2]
+8.5
+
+[9.0, 5.0, 7.2, 6.0, 10.0, 8.2]
+
+Também é possível remover um elemento de uma posição específica usando o método remove(), passando como parâmetro o índex do elemento. Nesse caso, usaremos o 3. Executando o código, o elemento nesta posição, 7.2, será removido.
+
+notas.append(10)
+notas.insert(5.0, at: 2)
+notas += [8.2]
+print(notas)
+
+var elementoRemovido = notas.remove(at: 3)
+print(elementoRemovido)
+
+print(notas)COPIAR CÓDIGO
+[8.5, 9.0, 5.0, 7.2, 6.0, 10.0, 8.2]
+7.2
+
+[8.5, 9.0, 5.0, 6.0, 10.0, 8.2]
+
+Percorrendo um array
+Agora vamos aprender a percorrer elementos do array utilizando laços de repetição. Para isso, usaremos a instrução for nota in notas. Com isso, pegaremos cada elemento - que estamos chamando de nota dentro do array notas.
+
+Dentro de chaves, podemos executar uma operação nesse laço de repetição. Nesse caso, faremos um print(nota).
+
+for nota in notas {
+    print(nota)
+}COPIAR CÓDIGO
+Como retorno, teremos cada nota de forma separada.
+
+8.5
+9.0
+
+5.0
+
+6.0
+
+10.0
+
+8.2
+
+Mas e se quisermos o índex de determinado elemento? Para isso, chamaremos cada elemento de i e, ai invés de notas, usaremos um intervalo de valores: 0..<notas.count. Assim, estamos percorrendo do índex 0 até a contagem de elementos nesse array.
+
+Repare que estamos utilizando um intervalo semiaberto (<). Fazemos isso pois nosso array inicialmente tem 6 valores, mas seu índex vai de 0 até 5. Sendo assim, se tentarmos acessar um elemento de índex 4, teremos um erro.
+
+Em nosso teste, faremos um print(notas[i]) para recuperar o índex.
+
+for i in 0..<notas.count {
+    print(notas[i])
+}COPIAR CÓDIGO
+Executando, teremos o mesmo resultado anterior.
+
+8.5
+9.0
+
+5.0
+
+6.0
+
+10.0
+
+8.2
+
+E o que acontece se alterarmos para um intervalo fechado?
+
+for i in 0...notas.count {
+    print(notas[i])
+}COPIAR CÓDIGO
+Teremos um erro de execução "Index out of range", ou seja, estamos tentando acessar o elemento de um índex inexistente, nesse caso o 6.
+
+Por fim, existe uma maneira de obter tanto o elemento quanto o índex. Para isso, criaremos na instrução for duas variáveis, index e elemento, e percorreremos o retorno de notas.enumerated(), função que traz uma sequência enumerada contendo tanto o índex quanto o elemento. Por fim, mostraremos esses valores no console.
+
+for (index, elemento) in notas.enumerated() {
+    print(index, elemento)
+}COPIAR CÓDIGO
+0 8.5
+1 9.0
+
+2 5.0
+
+3 6.0
+
+4 10.0
+
+5 8.2
+
+No próximo vídeo continuaremos explorando as coleções!
+
+@@04
+Opa! Erro no sistema?
+
+Vimos sobre a importância dos arrays na linguagem Swift.
+Um colega procurou você para pedir ajuda: ele escreveu um trecho de código que está dando erros! Assim, observe com atenção o código abaixo:
+
+let array1 = [Int]()
+let array2 = []
+let array3: [String] = []
+let array4 = [1, 2, 3]
+print(array4[0])
+array4.append(5)COPIAR CÓDIGO
+Hora de ajudar o seu amigo! Agora que você analisou o código, qual (ou quais) linha(s) causa(m) um erro de compilação - e por quê?
+
+Linha 3, pois atribui um tipo a um array vazio; e linha 5, porque o comando de print está inadequado também.
+ 
+Alternativa correta
+Apenas a linha 2, pois let array2 = [] é vazio, um erro na linguagem Swift.
+ 
+A linha 2 está errada, porém não é a única linha que contém um erro de compilação.
+A linha 6 causa um erro pois o array foi inicializado como let, ou seja, como uma constante. Assim, não podemos realizar nenhuma operação de mudança nesse array.
+Alternativa correta
+Linha 02 e Linha 06, pois não é possível criar array vazio sem especificarmos os dados; e não podemos modificar um array com let (uma constante).
+ 
+Exato! Na linha 2, não há como criar um array vazio sem saber o tipo que os dados terão. Nesse caso, é necessário explicitar o tipo de dado.
+Já a linha 06 causará erro pois o array foi inicializado como let, ou seja, como uma constante. Assim, não podemos realizar nenhuma operação de mudança nesse array.
+Alternativa correta
+Linha 1, pois não podemos declarar um array com let array1 = [Int]().
+
+@@05
+Operando com Sets
+
+Vamos aprender sobre sets, um tipo de dado que representa coleções, assim como arrays, mas com algumas diferenças. Para estudarmos na prática, criaremos uma variável nomes armazenando uma coleção de 4 nomes.
+var nomes = ["Giovanna", "Ana", "João", "Caio"]COPIAR CÓDIGO
+Se executarmos esse código, segurarmos a tecla "Ctrl" (ou "Option" no Mac) e clicarmos na variável nomes, veremos que ela foi definida implicitamente como um array do tipo String. Como sets são extremamente parecidos com arrays, é necessário definir explicitamente que são sets, da mesma forma que fizemos com Character e String.
+
+Faremos isso adicionando dois pontos após a variável (nomes:) e usando a instrução Set<String>, com o tipo de dado entre os sinais de maior e menor.
+
+var nomes: Set<String> = ["Giovanna", "Ana", "João", "Caio"]COPIAR CÓDIGO
+Com isso, nossa variável passa a representar um set. Executando o código, veremos que a ordem dos elementos é alterada:
+
+{"Ana", "João", "Giovanna", "Caio"}
+Executando outra vez, a ordem será alterada novamente:
+
+{"Giovanna", "Ana", "João", "Caio"}
+Isso significa que set é um tipo de dado desordenado, ou seja, não possui uma ordenação fixa. Por esse motivo, não é possível acessar um elemento de um set por um índex, afinal ele não possui. Inclusive, se tentarmos fazer isso, receberemos um erro:
+
+var nomes: Set<String> = ["Giovanna", "Ana", "João", "Caio"]
+nomes[0]COPIAR CÓDIGO
+Nesse caso, poderíamos utilizar a função contains(), que vimos anteriormente em arrays, passando algum elemento a ser buscado nesse set.
+
+var nomes: Set<String> = ["Giovanna", "Ana", "João", "Caio"]
+nomes.contains("Ana")COPIAR CÓDIGO
+Fazendo isso, teremos verdadeiro (true) como retorno.
+
+Outro ponto importante é que se adicionarmos um elemento duplicado em nosso set, ele não aparecerá duas vezes:
+
+var nomes: Set<String> = ["Giovanna", "Ana", "João", "Caio", João"]
+nomes.contains("Ana")COPIAR CÓDIGO
+{"Ana", "João", "Giovanna", "Caio"}
+Isso acontece porque o set não permite elementos duplicados. Ou seja, não importa quantos "João" tivermos em nosso set, ele só será exibido uma única vez.
+
+Outros métodos que utilizamos com arrays também podem ser usados com sets, como o insert(). Para testar, incluiremos o nome "Carla".
+
+var nomes: Set<String> = ["Giovanna", "Ana", "João", "Caio", João"]
+nomes.contains("Ana")
+
+nomes.insert("Carla")COPIAR CÓDIGO
+inserted true, memberAfterInsert "Carla")
+Não é possível inserir em determinada posição, afinal esse conceito não existe no set. Também é possível remover um elemento com remove().
+
+var nomes: Set<String> = ["Giovanna", "Ana", "João", "Caio", João"]
+nomes.contains("Ana")
+
+nomes.insert("Carla")
+nomes.remove("Giovanna")COPIAR CÓDIGO
+"Giovanna"
+Executando, teremos como retorno o elemento removido. Recapitulando: sets não possuem nenhuma ordenação em relação aos elementos e não podem conter valores duplicados. No próximo vídeo continuaremos estudando coleções e aprenderemos sobre tuplas.
+
+@@06
+Conhecendo Tuplas
+
+Agora, aprenderemos sobre tuplas. Com elas, você pode ter valores de tipos diferentes.
+Normalmente, tuplas representam um par de valores, mas você também pode adicionar mais de dois valores em uma Tupla. Vamos entender como elas funcionam.
+
+No Xcode, vamos criar uma variável utilizando o var. Ela representará coordenadas num plano cartesiano, de valor x e valor y. Então, o nome dessa variável será coordenadas.
+
+Depois do sinal de igual (=), abrimos e fechamos parênteses e escrevemos dois valores dentro deles, como 5 e 3:
+
+var coordenadas = (5, 3) COPIAR CÓDIGO
+Pronto! Temos uma tupla. Ao executar esse código e pressionar a tecla "Option" em seguida, veremos um detalhamento sobre a declaração dessa variável indicando que os valores são do tipo "Int, Int".
+
+Mas, como dissemos, podem ser tipos diferentes. Por exemplo, podemos inserir um inteiro e um valor decimal. Vamos apenas trocar o 3 para 3.5:
+
+var coordenadas = (5, 3.5)COPIAR CÓDIGO
+Ao executar esse código e pressionar "Option" novamente, conseguimos ver que os valores são do tipo "Int, Double". Ou seja, um inteiro e um decimal.
+
+Acessando valores da tupla
+Podemos executar coordenadas.0 para acessar o primeiro valor - no caso, 5. Para acessar o segundo valor, coordenadas.1 - 3.5.
+
+Caso você queira, também pode adicionar um terceiro valor na tupla, como o 9: var coordenadas = (5, 3.5, 9). Nesse caso, para acessá-lo, executamos coordenadas.2.
+
+É interessante deixar o Swift definir o funcionamento dessa tupla de forma implícita. Caso contrário, teríamos que definir cada tipo de dado que inserimos nela. Por exemplo:
+
+var coordenadas: (Int, Double, Int) = (5, 3.5, 9)COPIAR CÓDIGO
+Nomeando valores
+Vamos apagar esse último valor, o 9, porque queremos representar o x e o y.
+
+Em vez de representar por zero e um, podemos nomear cada valor. Para isso, antes do 5, colocamos um x: e, antes do 3.5, colocamos um y::
+
+var coordenadas (Int, Double) = (x: 5, y: 3.5)COPIAR CÓDIGO
+Se executarmos esse código com coordenadas.0 e coordenadas.1, nada diferente acontecerá, não teremos nenhum erro.
+
+Mas, vamos tentar acessar de outra forma, usando x e y:
+
+var coordenadas (Int, Double) = (x: 5, y: 3.5)
+coordenadas.x
+coordenadas.yCOPIAR CÓDIGO
+Essa é a maneira com que gostaríamos de acessar nossos valores. No entanto, ao executar esse código, é apresentado um erro.
+
+Isso porque, no tipo de dado, também precisamos definir as representações. Então inserimos x: antes de Int e y: antes de Double:
+
+var coordenadas (x: Int, y: Double) = (x: 5, y: 3.5)
+coordenadas.x
+coordenadas.yCOPIAR CÓDIGO
+Agora, ao executar o código, serão retornados os valores corretamente:
+
+coordenadas.x = 5
+coordenadas.y = 3.5
+Conforme conversamos, você também pode adicionar uma coordenada z de tipo inteiro, e, na sua tupla, insere um valor para ela, como 8.0. Para acessar, repetimos o processo: coordenadas.z:
+
+var coordenadas (x: Int, y: Double, z: Double) = (x: 5, y: 3.5, z: 8.0)
+coordenadas.x
+coordenadas.yCOPIAR CÓDIGO
+Ao executar esse código, veremos que:
+
+coordenadas.z = 8
+Typealias
+Definimos os valores dessa tupla de forma explícita. Você se lembra de quando aprendemos sobre typealias, no começo desse curso?
+
+Poderíamos, então, criar um typealias que represente o tipo de dado dessa coordenada. O tipo de dado é "Coordenadas" com "c" maiúsculo, pois sempre que escrevemos tipos de dados, usamos a primeira letra maiúscula.
+
+Depois, colocamos um sinal de igual e copiamos a definição dos tipos de dados da tupla, atribuindo a esse typealias.
+
+Por fim, na variável coordenadas, vamos definir que o tipo de dado é igual a Coordenadas:
+
+typealias Coordenadas = (x: Int, y: Double, z: Double)
+
+var coordenadas: Coordenadas = (x: 5, y: 3.5, z: 8.0)
+coordenadas.x
+coordenadas.yCOPIAR CÓDIGO
+Assim, nosso código fica bem mais legível e compreensível.
+
+Desestruturação dos valores
+Agora, em outro exemplo, vamos criar uma tupla que tenha o nome e a idade de uma pessoa.
+
+Então, vamos declarar uma variável pessoa, deixando que o Swift defina implicitamente o seu funcionamento. Nessa variável, vamos colocar o valor de tipo nome, que será "Giovanna", e a idade, que será 22. Depois, vamos acessar os valores pelos tipos que atribuímos.
+
+var pessoa = (nome: "Giovanna", idade: 22)
+pessoa.nome
+pessoa.idadeCOPIAR CÓDIGO
+Ao executar esse código, receberemos:
+
+pessoa.nome = "Giovanna"
+pessoa.idade= 22
+Podemos fazer uma desestruturação desses valores. Ou seja, podemos criar uma variável, abrindo parênteses e escrevendo nome, idade. Vamos igualar isso a pessoa:
+
+var (nome, idade) = pessoaCOPIAR CÓDIGO
+Ou seja, desestruturamos pessoa e pegamos certas variáveis dessa tupla, sendo o nome e a idade.
+
+Então, vamos imprimir nome e idade no console e ver o que acontece:
+
+var (nome, idade) = pessoa
+print(nome)
+print(idade)COPIAR CÓDIGO
+Ao executar esse código, recebemos:
+
+Giovanna
+22
+
+Mas, vamos supor que não queremos pegar o nome, apenas a idade. Para isso, podemos colocar um underline no lugar do nome:
+
+var (_, idade) = pessoa
+print(idade)COPIAR CÓDIGO
+O underline significa simplesmente que estamos ignorando uma variável. Executando esse código, recebemos no console:
+
+22
+Pegamos apenas a idade da tupla pessoa.
+
+Nesse vídeo, aprendemos sobre tuplas e como elas funcionam. Na sequência, vamos para a última parte de coleções no Swift, em que falaremos sobre dicionários.
+
+Nos encontramos lá!
+
+@@07
+Entendendo Dicionários
+
+Veremos agora o último tipo que remete a uma coleção de valores: o dicionário. Em outras linguagens, como o JavaScript, dicionários são os objetos.
+Dicionário é uma coleção de valores que possui uma chave, e essa chave remete a um valor.
+Criando um dicionário
+Vamos imaginar que estamos construindo um aplicativo que possui algum esquema de pontuação. Por exemplo, cada nome de usuário fez alguma pontuação em determinado jogo, ou qualquer outra situação que envolva pontos.
+
+Então, criaremos uma variável chamada pontuacao e igualar a colchetes, porque é assim que declaramos um dicionário também. Dentro deles, precisamos colocar a chave. No nosso caso, a chave será o nome do usuário - como "joaosilva".
+
+Colocamos os dois pontos e, em seguida, o valor referente a essa chave. Como estamos armazenando uma pontuação, armazenaremos um número inteiro. João Silva marcou 20 pontos, por exemplo, então colocamos esse número e, ao lado, uma vírgula.
+
+Na linha de baixo, colocamos um novo valor. A chave pode ser "felipesilva", que fez 10 pontos. Por fim, um último usuário, "giovannamoeller", fez 15 pontos:
+
+var pontuacao = [
+    "joaosilva": 20,
+    "felipesilva": 10,
+    "giovannamoeller": 15
+]COPIAR CÓDIGO
+Ao executar esse código, conseguimos ver o resultado na aba direita da tela, com os nomes de usuário e suas respectivas pontuações na mesma linha.
+
+Se pressionarmos a tecla "Option" em cima de pontuacao, conseguimos ver o tipo do dado: "[String : Int]". String é o tipo de dado da chave; já Int é o tipo de dado da pontuação.
+
+Note que uma chave não pode ser repetida!
+Vamos adicionar "joaosilva" novamente na variável pontuacao, atribuindo 5 pontos a ele:
+
+var pontuacao = [
+    "joaosilva": 20,
+    "felipesilva": 10,
+    "giovannamoeller": 15
+    "joaosilva": 5
+]COPIAR CÓDIGO
+Se executarmos esse código, observaremos um erro: você não pode duplicar chaves nesse dicionário. Então vamos deletar esse último "joaosilva".
+
+Dicionário vazio
+Podemos também criar dicionários vazios. Nesse caso, vamos supor que temos um dicionário em que queremos armazenar o nome da pessoa e a sua idade, que também é um caso de string e número inteiro, mas poderia ser qualquer outro tipo de dado.
+
+Então, nossa variável se chamará pessoas. Como estamos criando um dicionário vazio, precisamos definir explicitamente o tipo dessa variável: [String: Int]. Igualaremos aos colchetes com dois pontos dentro:
+
+var pessoas: [String: Int] = [:]COPIAR CÓDIGO
+Pronto! Você criou um dicionário vazio chamado pessoas em que a chave é uma string e o valor é um número inteiro, assim como a variável pontuacao.
+
+Função reserveCapacity()
+Uma funcionalidade interessante dos dicionários em Swift é reservar uma certa capacidade para esse dicionário quando inicializamos com ele vazio.
+
+Por exemplo: se sabemos que esse dicionário terá 10 elementos, podemos reservar apenas 10 espaços na memória. Isso é muito importante para performance e otimização.
+
+Para isso, utilizamos o método reserveCapacity(), passando o número de espaços:
+
+var pessoas: [String: Int] = [:]
+pessoas.reserveCapacity(10)COPIAR CÓDIGO
+Agora, podemos adicionar 10 elementos na variável pessoas.
+
+Acessando valores a partir de uma chave
+Para isso, fazemos algo parecido com o que fazemos com arrays. Vamos exibir no console pontuacao[], passando o nome da chave que desejamos, como a do "felipesilva":
+
+print(pontuacao["felipesilva"])COPIAR CÓDIGO
+Receberemos como retorno:
+
+Optional(10)
+Ou seja, esse código retorna uma opcional, porque o Swift não garante que essa chave que colocamos realmente existe. Isso é extremamente importante para a segurança do nosso código!
+
+Se passássemos a chave "aaaa", o código retornaria um nil. Ou seja, em vez de dar um erro na execução do código, é muito mais seguro retornar uma opcional. Nesse caso, precisaríamos desembrulhar essa opcional com métodos que já vimos anteriormente.
+
+Métodos
+Temos vários métodos para os dicionários, assim como em qualquer outro tipo de coleção.
+
+isEmpty
+Com esse método, podemos verificar se o dicionário está vazio ou não. Rodando pontuacao.isEmpty, temos "false" como retorno.
+
+count
+Usamos esse método para verificar quantos elementos existem no dicionário. Rodando pontuacao.count, recebemos o número "3".
+
+Adicionar um novo valor
+Para adicionar um novo valor ao nosso dicionário, podemos escrever pontuacao[], inserindo uma chave que ainda não existe, como "anaclara", e atribuir algum valor, como 30:
+
+pontuacao["anaclara"] = 30COPIAR CÓDIGO
+Vamos dar um print em pontuacao para ver qual é o resultado disso. Rodando print(pontuacao), recebemos no console:
+
+["giovannamoeller": 15, "joaosilva": 20, "felipesilva": 10, "anaclara": 30]
+Ou seja, temos o nome de usuário "anaclara" adicionado ao final.
+
+Atualização de valores
+Também podemos atualizar uma chave. Por exemplo, vamos alterar a pontuação de "giovannamoeller" para 50:
+
+pontuacao["giovannamoeller"] = 50COPIAR CÓDIGO
+Agora, movemos o print(pontuacao) para baixo da alteração. Ao executar o código, veremos a pontuação atualizada:
+
+["joaosilva": 20, "felipesilva": 10, "anaclara": 30, "giovannamoeller": 50]
+Também podemos atualizar valores por um método chamado updateValue(), inserindo o valor para a chave (forKey) desejada. Vamos, então, atualizar a pontuação de "giovannamoeller" para 60:
+
+pontuacao.updateValue(60, forKey: "giovannamoeller")COPIAR CÓDIGO
+É importante notar que, se você colocar uma chave que não existe, o Swift criará essa chave. Vamos fazer isso e dar um print novamente:
+
+pontuacao.updateValue(30, forKey: "pedrosantos")
+print(pontuacao)COPIAR CÓDIGO
+Rodando esse código, nosso console exibirá:
+
+["joaosilva": 20, "felipesilva": 10, "anaclara": 30, "pedrosantos": 30, "giovannamoeller": 50]
+O nome de usuário "pedrosantos" foi adicionado com o valor 30, já que a chave não foi encontrada para atualização. A chave "giovannamoeller" foi novamente atualizada também.
+
+Remover valores
+Para remover um valor, podemos simplesmente atribuir o valor da chave a "nil". Vamos remover "giovannamoeller" do placar:
+
+pontuacao["giovannamoeller"] = nilCOPIAR CÓDIGO
+Exibindo o resultado no console novamente, com print(console), recebemos:
+
+["joaosilva": 20, "felipesilva": 10, "anaclara": 30, "pedrosantos": 30]
+O nome de usuário "giovannamoeller" sumiu!
+
+Mas, também existe um método que podemos utilizar especificamente para remover: removeValue(), passando a chave que queremos remover. Vamos passar, por exemplo, o "pedrosantos":
+
+pontuacao.removeValue(forKey: "pedrosantos")COPIAR CÓDIGO
+Vamos exibir o dicionário no console novamente, com print(pontuacao):
+
+["joaosilva": 20, "felipesilva": 10, "anaclara": 30]
+O nome de usuário "pedrosantos" também foi removido.
+
+É importante mencionar que esse método que remove o valor também retorna o valor a ser removido. Na linha em que removemos "pedrosantos", na aba direita do playground, podemos ver o número "30", a pontuação desse nome de usuário.
+
+Percorrendo o dicionário
+Também podemos percorrer dicionários utilizando laços de repetição, como o for.
+
+Para isso, escrevemos for e precisaremos criar duas variáveis: uma para armazenar a chave e outra para o valor. Quando criamos duas variáveis, precisamos colocá-las dentro de parênteses para o Swift entender: (nome, pontuacao)
+
+Então, vamos criar uma variável nome e uma pontuacao. Depois, escrevemos in pontuacao, o nome do nosso dicionário.
+
+Também vamos exibir a seguinte mensagem no console, usando a interpolação de variáveis: "O usuário (nome) fez (pontuacao) pontos."
+
+for (nome, pontuacao) in
+    pontuacao {
+    print("O usuário \(nome) fez \(pontuacao) pontos.")
+}COPIAR CÓDIGO
+Ao executar esse código, veremos o seguinte no console:
+
+O usuário joaosilva fez 20 pontos.
+O usuário felipesilva fez 10 pontos.
+O usuário anaclara fez 30 pontos.
+Se quiséssemos percorrer apenas as chaves, poderíamos declarar uma variável chamada nome e, depois do in, escrever pontuacao.keys. Exibimos apenas nome no console:
+
+for nome in pontuacao.keys { 
+    print(nome)
+}COPIAR CÓDIGO
+Receberemos todos os nomes de usuário do dicionário no console:
+
+joaosilva
+felipesilva
+anaclara
+Faríamos o mesmo para percorrer apenas os valores, criando uma variável chamada pontos, usando values:
+
+for pontos in pontuacao.values { 
+    print(pontos)COPIAR CÓDIGO
+No console:
+
+20
+10
+30
+Aprendemos sobre dicionários, como criá-los e utilizá-los! Na sequência, falaremos sobre closures.
+
+Até lá!
+
+@@08
+Desafio: coleções
+
+Aprendemos sobre coleções na linguagem Swift. Agora é sua vez de praticar, e para isso, vou te propor dois desafios! Vamos lá?
+Desafio 1 - Aprovado ou reprovado?
+Pense em um aplicativo que faz o cálculo da média de notas de alunos de uma turma! Ainda não podemos produzir um aplicativo, mas vamos usar essa situação para praticar um pouco:
+
+Escreva uma função que receba um array de notas de um determinado aluno e retorne a média aritmética dessas notas.
+Lembrando que, para calcular a média aritmética, você precisa somar todos os valores e dividir pela quantidade total dos valores. Logo, se um aluno possui cinco notas, encontraremos a média somando o total dessas notas por cinco.
+Desafio 2 - Estados do Brasil
+Dado um dicionário com duas letras que representam um estado como chave e o nome inteiro do estado como valor, escreva uma função que exiba todos os estados cujo nome tenha mais que 8 caracteres.
+
+Por exemplo, para o dicionário [”SP”: “São Paulo”, “CE”: “Ceará”, “RJ”: “Rio de Janeiro”], será exibido “São Paulo” e “Rio de Janeiro”, pois “Ceará” não possui mais de 8 caracteres.
+Vamos lá?
+
+No exercício 1, você pode ter desenvolvido algo como:
+func calculaMedia(_ notas: [Double]) -> Double {
+    var somaNotas = 0.0
+    let quantidadeElementos = notas.count
+    for nota in notas {
+        somaNotas += nota
+    }
+    return somaNotas / Double(quantidadeElementos)
+}
+
+let notas = [8.9, 10, 9.5, 6.7, 8.5]
+let mediaNotas = calculaMedia(notas)COPIAR CÓDIGO
+Enquanto no exercício 2, cheguei nessa conclusão:
+
+func exibeEstado(_ estados: [String: String]) {
+    for estado in estados.values {
+        if estado.count > 8 {
+            print(estado)
+        }
+    }
+}
+
+let estados = ["SP": "São Paulo",
+               "CE": "Ceará",
+               "RJ": "Rio de Janeiro"]
+exibeEstado(estados)COPIAR CÓDIGO
+Observação: não se preocupe se seu código ficou muito diferente do meu, existem diversas maneiras de chegar em um mesmo resultado.
+
+Apenas certifique-se de que você está escrevendo um código legível, com nomes bem definidos, etc.
+
+@@09
+Projeto final
+
+Você pode baixar ou acessar o código-fonte dessa aula.
+Bons estudos!
+
+https://github.com/alura-cursos/swift-entendendo-a-linguagem/archive/refs/heads/aula-05.zip
+
+https://github.com/alura-cursos/swift-entendendo-a-linguagem/tree/aula-05
+
+@@10
+Recados finais
+
+Parabéns, você chegou ao fim do nosso curso. Tenho certeza que esse mergulho foi de muito aprendizado.
+Após os créditos finais do curso, você será redirecionado para uma tela na qual poderá deixar seu feedback e avaliação do curso. Sua opinião é muito importante para nós!
+
+Aproveite para conhecer a nossa comunidade no Discord da Alura e se conectar com outras pessoas com quem pode conversar, aprender e aumentar seu networking.
+
+Continue mergulhando com a gente!
+
+@@11
+O que aprendemos?
+
+Nesta aula, você aprendeu sobre:
+Identificar o que são coleções e como funcionam em Swift;
+Operar com arrays, sets, tuplas e dicionários;
+Entender e aplicar os principais métodos e propriedades de cada tipo de coleção.
+Concluímos a Aula 5! Se tiver alguma dúvida, não deixe de aparecer lá no fórum ou também no nosso servidor do Discord.
+
+Por que não ajudar a responder a uma dúvida? Explicar um assunto para alguém é uma ótima forma de aprender e consolidar o conhecimento!
+
+Nos vemos na próxima aula!
+
+@@12
+Conclusão
+
+Parabéns por concluir esse curso! Agora, você entende os principais fundamentos da linguagem Swift.
+Aprendemos sobre:
+
+Criação de variáveis;
+Tipos de dados;
+Controle de fluxo com condicionais;
+Laços de repetição.
+Além disso, também vimos:
+
+Funções;
+Opcionais;
+Diversos tipos de dados envolvendo coleções, como arrays, sets, tuplas e dicionários.
+Você já consegue escrever diversos códigos nesta linguagem aplicando tudo que aprendemos!
+
+Se você tiver qualquer dúvida, não deixe de nos procurar no fórum e no Discord. Estaremos à sua disposição! Lá, você também encontrará pessoas que estão fazendo ou já concluíram esse curso. Então, você pode trocar ideias sobre o universo do desenvolvimento iOS.
+
+A sua avaliação também é extremamente importante para nós: não esqueça de deixar a sua nota para esse curso! Você também pode nos marcar nas redes sociais mostrando o que aprendeu durante as aulas, com a hashtag #AprendiNaAlura.
+
+Muito obrigada por chegar até aqui. Até a próxima!
+
+https://cursos.alura.com.br/forum/categoria-mobile/todos/1
+
+@@13
+Créditos
+
+Pessoa instrutora
+Giovanna Moeller
+Apoio ágil
+
+Cássio Murilo
+Apoio técnico
+
+Alex Felipe
+Apoio didático
+
+Christian Rosa
+Denize da Silva Dias Cruz
+Produção audiovisual
+
+Vinicius Corrêa (Hide)
+Transcrição
+
+Bruna Gonçalves
+Nyerik Scarmeloto
+Publicação
+
+Rafael Bomfim
+Karina Silva Gigliozzi
